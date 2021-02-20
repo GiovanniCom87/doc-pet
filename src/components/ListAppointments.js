@@ -1,3 +1,6 @@
+import {FaTimes} from 'react-icons/fa'
+import Moment from 'react-moment'
+
 export function ListAppointments(props){
 
     return(  
@@ -5,13 +8,21 @@ export function ListAppointments(props){
         {props.appointments.map(item => (
           <div className="pet-item col media py-3" key={props.appointments.indexOf(item)}>
             <div className="mr-3">
-              <button className="pet-delete btn btn-sm btn-danger">X</button>
+              <button className="pet-delete btn btn-sm btn-danger" onClick={()=>props.deleteApt(item)}>
+                <FaTimes />
+              </button>
             </div>
 
             <div className="pet-info media-body">
               <div className="pet-head d-flex">
-                <span className="pet-name">{props.appointments.indexOf(item)} - {item.petName}</span>
-                <span className="apt-date ml-auto">{item.aptDate}</span>
+                <span className="pet-name">{item.petName}</span>
+                <span className="apt-date ml-auto">
+                <Moment 
+                date={item.aptDate}
+                parse="YYYY-MM-dd hh:mm"
+                format="D MMM YYYY - HH:mm"
+                />
+                </span>
               </div>
 
               <div className="owner-name">
